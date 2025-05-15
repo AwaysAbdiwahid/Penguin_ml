@@ -6,7 +6,9 @@ import streamlit as st
 from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-st.title("Penguin Classifier")
+st.title("Penguin Classifier: A machine learning classifier")
+st.header("Developed by Aways Abdiwahid")
+st.subheader("Source: Tylerj Richards's Streamlit for Data Science course")
 st.write(
     """ This app uses 6 inputs to predict the species of penguin using
     a model built on the Palmer Penguins dataset. Use the form below
@@ -88,36 +90,39 @@ the species, the features used in this prediction are ranked by
 a relative importance below"""
 )
 st.image("feature_importance.png")
-st.write(
-    """
-Below are the histograms for each continous variable
-separated by penguin species.
-the vertical line represents you the inputed value."""
-)
-fig, ax = plt.subplots()
-ax = sns.displot(x = penguin_df['bill_length_mm'], 
-                 hue=penguin_df['species'], multiple = 'dodge')
-plt.axvline(bill_length)
-plt.title("Bill Length by Species")
-st.pyplot(ax)
+if penguin_file is not None:
+    st.write(
+        """
+    Below are the histograms for each continous variable
+    separated by penguin species.
+    the vertical line represents you the inputed value."""
+    )
+    fig, ax = plt.subplots()
+    ax = sns.displot(x = penguin_df['bill_length_mm'], 
+                    hue=penguin_df['species'], multiple = 'dodge')
+    plt.axvline(bill_length)
+    plt.title("Bill Length by Species")
+    st.pyplot(ax)
 
-fig, ax = plt.subplots()
-ax = sns.displot(x = penguin_df['bill_depth_mm'], 
-                 hue=penguin_df['species'], multiple = 'dodge')
-plt.axvline(bill_length)
-plt.title("Bill Depth by Species")
-st.pyplot(ax)
+    fig, ax = plt.subplots()
+    ax = sns.displot(x = penguin_df['bill_depth_mm'], 
+                    hue=penguin_df['species'], multiple = 'dodge')
+    plt.axvline(bill_length)
+    plt.title("Bill Depth by Species")
+    st.pyplot(ax)
 
-fig, ax = plt.subplots()
-ax = sns.displot(x = penguin_df['flipper_length_mm'], 
-                 hue=penguin_df['species'], multiple = 'dodge')
-plt.axvline(bill_length)
-plt.title("Flipper Length by Species")
-st.pyplot(ax)
+    fig, ax = plt.subplots()
+    ax = sns.displot(x = penguin_df['flipper_length_mm'], 
+                    hue=penguin_df['species'], multiple = 'dodge')
+    plt.axvline(bill_length)
+    plt.title("Flipper Length by Species")
+    st.pyplot(ax)
 
-fig, ax = plt.subplots()
-ax = sns.displot(x = penguin_df['body_mass_g'], 
-                 hue=penguin_df['species'], multiple = 'dodge')
-plt.axvline(bill_length)
-plt.title("Body Mass by Species")
-st.pyplot(ax)
+    fig, ax = plt.subplots()
+    ax = sns.displot(x = penguin_df['body_mass_g'], 
+                    hue=penguin_df['species'], multiple = 'dodge')
+    plt.axvline(bill_length)
+    plt.title("Body Mass by Species")
+    st.pyplot(ax)
+else:
+    st.info("Upload a dataset to view histogram plots by species.")
